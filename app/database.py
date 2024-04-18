@@ -11,9 +11,9 @@ prompt=PromptTemplate.from_template("""
 同时你的输出格式应该如下：
 
 案例：xxx
-
+\n
 案例：xxx
-
+\n
 """)
 # 使用format_prompt方法格式化prompt模板，将kind和example参数传入
 prompt=prompt.format_prompt(kind="",example="")
