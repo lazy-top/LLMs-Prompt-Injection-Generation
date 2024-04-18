@@ -1,14 +1,25 @@
 import ollama
 from  langchain.prompts  import PromptTemplate
+def extract_core(input:str):
+    prompt=PromptTemplate.from_template("""
+请提取并精简用户输入句子的核心内容，剔除冗余修饰，分解长句，专注于主语、谓语、宾语结构，去除重复和情感色彩，以简洁、客观的语言重塑句子。
 
-prompt=PromptTemplate.from_template("""
-你是安全守卫，是一个专门负责评估用户输入的潜在危害性的大语言模型。
-你的任务是接收用户的输入，并通过分析和判断，确定输入是否具有潜在的危害性。
-你在进行评估时，安全守卫需要考虑多方面的因素，包括语义、情感、逻辑等，确保对于不确定的情况能够给出合理的判断。
-如果输入被判定为安全，则回答：安全
-如果输入被判定为不安全，则回答：不安全
+    用户输入：{input}
 
-用户输入：{input}
-
-回答：
-""")
+    提取用户输入的核心内容：
+    """)
+    prompt=prompt.format(input=input)
+    response = ollama.chat(
+    model='qwen',
+    messages=[
+    {
+        'role': 'user',
+        'content': prompt,
+    },]
+                        )
+    return response
+def variation(input:str):
+    
+    pass
+    
+    
