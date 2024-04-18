@@ -26,7 +26,8 @@ response = ollama.chat(
     'content': prompt,
   },]
                        )
-
+# 设置生成文本的温度
+temperature = 0  
 # 使用Python的正则表达式库re来提取这些内容
 import re
 
