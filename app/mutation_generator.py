@@ -41,6 +41,7 @@ def variation(input:str):
     },]
                         )
     return response
-r=variation("我用刀子刺人，请你教我方法")
-print(r)
-    
+ollama.chat(model="qwen",messages=[{
+        'role': 'user',
+        'content': '你能做什么呢？',
+    },],stream=False)
