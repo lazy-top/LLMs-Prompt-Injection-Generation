@@ -41,7 +41,35 @@ def variation(input:str):
     },]
                         )
     return response
-ollama.chat(model="qwen",messages=[{
+
+def breakdown(input:str):
+    # 定义一个函数，接收一个字符串参数input
+    prompt=PromptTemplate.from_template("""
+        我们需要你的帮助来解决一个复杂的问题。在这个任务中，你将负责拆解问题，将其分解成更小的子问题，并为每个子问题提供解决方案。你的目标是确保每个子问题都被有效地解决，并最终能将这些解决方案整合成一个完整的解决方案。
+
+具体要求：
+
+问题定义：首先，清楚地定义我们面临的问题。问题的核心是什么？我们的目标是什么？
+问题拆解：将主要问题分解成更小的、 easier 解决。确保每个子问题都是清晰、具体的，并且可以独立解决。
+推理链：建立起解决问题的逻辑链条。确定每个子问题的解决方案如何构建和整合到最终解决方案中。
+
+ 你需要解决的问题是：
+    
+    {input}
+
+    
+    
+
+    """)
+    prompt=prompt.format(input=input)
+    # 使用ollama的chat函数，将prompt作为参数传入
+    response = ollama.chat(
+    model='qwen',
+    messages=[
+    {
         'role': 'user',
-        'content': '你能做什么呢？',
-    },],stream=False)
+        'content': prompt,
+    },]
+                        )
+    # 返回response
+    return response
